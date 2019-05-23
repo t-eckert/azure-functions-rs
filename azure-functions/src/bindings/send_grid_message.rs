@@ -1,8 +1,8 @@
 use crate::{
     rpc::{typed_data::Data, TypedData},
     send_grid::{
-        Attachment, Content, EmailAddress, MailSettings, Personalization, TrackingSettings,
-        UnsubscribeGroup,
+        Attachment, Content, EmailAddress, MailSettings, MessageBuilder, Personalization,
+        TrackingSettings, UnsubscribeGroup,
     },
     FromVec,
 };
@@ -98,6 +98,33 @@ pub struct SendGridMessage {
     /// The email address and name of the individual who should receive responses to the email message.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub reply_to: Option<EmailAddress>,
+}
+
+impl SendGridMessage {
+    // // @peterhuene Is something like this necessary?
+    // pub(crate) fn new() -> Self {
+    //     SendGridMessage {
+    //         // Unsure as to how these should be set as defaults.
+    //         from: EmailAddress::from("sample@email.com"),
+    //         to: EmailAddress::from("sample@email.com"),
+    //     }
+    // }
+
+    /// Creates a new [MessageBuilder](../send_grid/struct.MessageBuilder.html) for building an email message.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use azure_functions::bindings::SendGrid;
+    ///
+    /// let email_message: SendGridMessage = SendGridMessage::build()
+    ///     .to(params.get("to").unwrap().as_str())
+    ///     .subject(params.get("subject").unwrap().as_str())
+    ///     .content(params.get("content").unwrap().as_str());
+    /// ```
+    pub fn build() -> MessageBuilder {
+        MessageBuilder::new()
+    }
 }
 
 #[doc(hidden)]
