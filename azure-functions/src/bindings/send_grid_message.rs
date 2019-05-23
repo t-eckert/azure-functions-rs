@@ -159,6 +159,25 @@ mod tests {
     use serde_json::Map;
 
     #[test]
+    fn it_has_build() {
+        let _builder: MessageBuilder = SendGridMessage::build();
+    }
+
+    #[test]
+    fn it_builds() {
+        // TODO: For this to work, I need to understand how to implement `into()`
+        //let message: SendGridMessage = SendGridMessage::build().into();
+    }
+
+    #[test]
+    fn it_builds_with_to() {
+        // TODO: For this to work, I need to understand how to implement `into()`
+        // let message: SendGridMessage = SendGridMessage::build()
+        //      .to(params.get("to").unwrap().as_str())
+        //      .into();
+    }
+
+    #[test]
     fn it_serializes_to_json() {
         let mut headers = HashMap::new();
         headers.insert("foo".to_owned(), "bar".to_owned());
