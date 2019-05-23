@@ -13,3 +13,7 @@ Cargo.lock
 
 # Ignore generated files by Vim
 *.sw*
+
+# Ignore files from MacOS
+*.DS_Store
+*.icloud
