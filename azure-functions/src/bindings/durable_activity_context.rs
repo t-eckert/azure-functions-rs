@@ -13,12 +13,42 @@ use std::collections::HashMap;
 ///
 /// # Examples
 ///
+/// 
+/// ``` rust
+/// use azure_functions::{bindings::DurableActivityContext, func};
+///
+///#[func]
+///pub fn say_hello(context: DurableActivityContext) {
+///    context.set_output(format!(
+///        "Hello {}!",
+///        context
+///            .input()
+///            .as_str()
+///            .expect("expected a string input")
+///    ));
+///}
+/// ```
+/// 
+/// 
 /// TODO: IMPLEMENT
 #[derive(Debug, Clone, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DurableActivityContext {}
 
 impl DurableActivityContext {
+    pub fn instance_id(&self) -> &str {
+        "placeholder"
+    }
+
+    pub fn input(&self) -> serde_json::Value {
+        
+    }
+
+    pub fn set_output<O>(&mut self, output: O) where O: Into<serde_json::Value> {
+
+    }
+
+
     #[doc(hidden)]
     pub fn new(data: TypedData, metadata: HashMap<String, TypedData>) -> Self {
         println!("{:#?}", data);
